@@ -77,7 +77,7 @@ else:
       tmp_part = [got_data['row'].tolist().index(selected_idx_part),
                   got_data['col'].tolist().index(selected_idx_part)]
       tmp_part.sort()
-      tmp_part = tmp_part[0:(min(len(tmp_part),N_edge_select))]
+      #tmp_part = tmp_part[0:(min(len(tmp_part),N_edge_select))]
       tmp = tmp + tmp_part
     
     df_select = got_data.loc[tmp]
