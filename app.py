@@ -69,7 +69,7 @@ if len(selected_codes) == 0:
 else:
 
     # Initiate PyVis network object
-    code_net = Network(height='800px', bgcolor='#222222', font_color='white')
+    code_net = Network(height='600px', bgcolor='#222222', font_color='white')
 
     # Create networkx graph object from pandas dataframe
     tmp = []
@@ -125,9 +125,9 @@ else:
     #code_net.repulsion(node_distance=420, central_gravity=0.33,
     #                   spring_length=110, spring_strength=0.10,
     #                   damping=0.95)
-    #code_net.repulsion(node_distance=420, central_gravity=-22350,
-    #                   spring_length=250, spring_strength=0.10,
-    #                   damping=0.95)
+    code_net.repulsion(node_distance=420, central_gravity=-1000,
+                       spring_length=110, spring_strength=0.10,
+                       damping=0.95)
 
     # Save and read graph as HTML file (on Streamlit Sharing)
     try:
