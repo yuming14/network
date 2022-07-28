@@ -108,7 +108,7 @@ else:
         w = e[2]
         
         tmptitle = title[src] + ': ' + desc[src] + '<br>Neighbors:'
-        for i in range(len(df_selec)):
+        for i in range(len(df_select)):
           if df_select['row'][i+1] == src:
             tmpid = df_select['col'][i+1]
             tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
@@ -120,7 +120,7 @@ else:
                           title = tmptitle, color = nodes_color[src])
         
         tmptitle = title[dst] + ': ' + desc[dst] + '<br>Neighbors:'
-        for i in range(len(df_selec)):
+        for i in range(len(df_select)):
           if df_select['row'][i+1] == dst:
             tmpid = df_select['col'][i+1]
             tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
