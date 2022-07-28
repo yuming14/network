@@ -125,7 +125,7 @@ else:
     #code_net.repulsion(node_distance=420, central_gravity=0.33,
     #                   spring_length=110, spring_strength=0.10,
     #                   damping=0.95)
-    code_net.repulsion(node_distance=420, central_gravity=-1000,
+    code_net.repulsion(node_distance=420, central_gravity=-10,
                        spring_length=110, spring_strength=0.10,
                        damping=0.95)
 
