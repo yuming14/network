@@ -74,9 +74,10 @@ else:
     # Create networkx graph object from pandas dataframe
     tmp = []
     for selected_idx_part in selected_idx:
-      tmp_part = (got_data['row'].isin(selected_idx) | \
-                  got_data['col'].isin(selected_idx))
-      tmp_part = tmp_part[range(0,np.min(len(tmp_part),N_edge_select))]
+      tmp_part = [got_data['row'].tolist().index(selected_idx_part),
+                  got_data['col'].tolist().index(selected_idx_part)]
+      tmp_part = tmp_part.sort()
+      tmp_part = tmp_part[0:(min(len(tmp_part),N_edge_select))]
       tmp = tmp + tmp_part
     
     df_select = got_data.loc[tmp]
