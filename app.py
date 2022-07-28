@@ -5,7 +5,7 @@ import networkx as nx
 from pyvis.network import Network
 import numpy as np
 
-st.set_page_config(layout="wide")
+#st.set_page_config(layout="wide")
 
 # Set header title
 st.title('Network Graph Visualization')
