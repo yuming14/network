@@ -55,7 +55,7 @@ code_list, idx = (list(t) for t in zip(*sorted(zip(code_list, idx))))
 selected_codes = st.multiselect('Select code(s) to visualize', code_list)
 selected_idx_idx = [code_list.index(i) for i in selected_codes]
 selected_idx = [idx[i] for i in selected_idx_idx]
-st.write("Nselected ="+str(len(selected_idx)))
+st.write("Nselected = "+str(len(selected_idx)))
 
 #target_fdr = st.slider("Target -log_10(Fdr)", min_value=0, max_value=50)
 #st.write("target fdr =", 1/np.power(10, target_fdr))
@@ -88,8 +88,6 @@ else:
     df_select = df_select.reset_index(drop=True)
     if len(df_select) == 0:
         st.text('Incorrect')
-    else:
-        st.text('Nedges ='+str(len(df_select)))
     sources = df_select['row']
     targets = df_select['col']
     weights = 1 - df_select['fdr']
@@ -119,7 +117,7 @@ else:
         node['title'] += '<br> Neighbors:<br>' + '<br>'.join(neighbor_map[node['id']])
         node['value'] = np.log(np.log(len(neighbor_map[node['id']])+5))
     
-    st.text('Nnodes ='+str(len(code_net.nodes)))
+    st.text('Nnodes = '+str(len(code_net.nodes))+'; Nedges = '+str(len(df_select)))
 
     # Generate network with specific layout settings
     #code_net.repulsion(node_distance=420, central_gravity=0.33,
