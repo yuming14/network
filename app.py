@@ -112,7 +112,7 @@ else:
           if df_select['row'][i+1] == src:
             tmpid = df_select['col'][i+1]
             tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
-          else if df_select['col'][i+1] == src:
+          elif df_select['col'][i+1] == src:
             tmpid = df_select['row'][i+1]
             tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
         
@@ -124,7 +124,7 @@ else:
           if df_select['row'][i+1] == dst:
             tmpid = df_select['col'][i+1]
             tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
-          else if df_select['col'][i+1] == dst:
+          elif df_select['col'][i+1] == dst:
             tmpid = df_select['row'][i+1]
             tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
         
