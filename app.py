@@ -76,7 +76,7 @@ else:
     for selected_idx_part in selected_idx:
       tmp_part = [got_data['row'].tolist().index(selected_idx_part),
                   got_data['col'].tolist().index(selected_idx_part)]
-      tmp_part = tmp_part.sort()
+      tmp_part.sort()
       tmp_part = tmp_part[0:(min(len(tmp_part),N_edge_select))]
       tmp = tmp + tmp_part
     
