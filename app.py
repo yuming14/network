@@ -106,24 +106,48 @@ else:
         src = e[0]
         dst = e[1]
         w = e[2]
-
-        code_net.add_node(title[src]+': '+desc[src], desc[src], 
-                          title = title[src] + ': ' + desc[src],
-                          color = nodes_color[src])
-        code_net.add_node(title[dst]+': '+desc[dst], desc[dst], 
-                          title = title[dst] + ': ' + desc[dst],
-                          color = nodes_color[dst])
+        
+        tmptitle = title[src] + ': ' + desc[src] + '<br>Neighbors:'
+        for i in range(len(df_selec)):
+          if df_select['row'][i+1] == src:
+            tmpid = df_select['col'][i+1]
+            tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
+          else if df_select['col'][i+1] == src:
+            tmpid = df_select['row'][i+1]
+            tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
+        
+        code_net.add_node(title[src]+': '+desc[src], desc[src],
+                          title = tmptitle, color = nodes_color[src])
+        
+        tmptitle = title[dst] + ': ' + desc[dst] + '<br>Neighbors:'
+        for i in range(len(df_selec)):
+          if df_select['row'][i+1] == dst:
+            tmpid = df_select['col'][i+1]
+            tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
+          else if df_select['col'][i+1] == dst:
+            tmpid = df_select['row'][i+1]
+            tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
+        
+        code_net.add_node(title[dst]+': '+desc[dst], desc[dst],
+                          title = tmptitle, color = nodes_color[dst])
+        
+        #code_net.add_node(title[src]+': '+desc[src], desc[src], 
+        #                  title = title[src] + ': ' + desc[src],
+        #                  color = nodes_color[src])
+        #code_net.add_node(title[dst]+': '+desc[dst], desc[dst], 
+        #                  title = title[dst] + ': ' + desc[dst],
+        #                  color = nodes_color[dst])
         code_net.add_edge(title[src]+': '+desc[src], 
                           title[dst]+': '+desc[dst], 
                           value = w*0.5, 
                           color = {'color': 'dimgrey', 'highlight': 'whitesmoke'})
 
-    neighbor_map = code_net.get_adj_list()
+    #neighbor_map = code_net.get_adj_list()
 
     # add neighbor data to node hover data
-    for node in code_net.nodes:
-        node['title'] += '<br> Neighbors:<br>' + '<br>'.join(neighbor_map[node['id']])
-        node['value'] = np.log(np.log(len(neighbor_map[node['id']])+5))
+    #for node in code_net.nodes:
+    #    node['title'] += '<br> Neighbors:<br>' + '<br>'.join(neighbor_map[node['id']])
+    #    node['value'] = np.log(np.log(len(neighbor_map[node['id']])+5))
     
     st.text('Nnodes = '+str(len(code_net.nodes))+'; Nedges = '+str(len(df_select)))
 
