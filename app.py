@@ -79,7 +79,7 @@ else:
       tmp_part = [i for i,x in enumerate(got_data['row'].tolist()) if x == selected_idx_part ] + \
                  [i for i,x in enumerate(got_data['col'].tolist()) if x == selected_idx_part ]
       tmp_part.sort()
-      #tmp_part = tmp_part[0:(min(len(tmp_part),N_edge_select))]
+      tmp_part = tmp_part[0:(min(len(tmp_part),N_edge_select))]
       tmp = tmp + tmp_part
     
     df_select = got_data.loc[tmp]
