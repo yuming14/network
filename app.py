@@ -59,7 +59,7 @@ st.write("Nselected = "+str(len(selected_idx)))
 
 #target_fdr = st.slider("Target -log_10(Fdr)", min_value=0, max_value=50)
 #st.write("target fdr =", 1/np.power(10, target_fdr))
-N_edge_select = st.slider("top prop% edges per node", min_value=0, max_value=1)
+N_edge_select = st.slider("top prop% edges per node", min_value=0.0, max_value=1.0)
 
 # Set info message on initial site load
 if len(selected_codes) == 0:
