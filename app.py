@@ -101,35 +101,26 @@ else:
     weights = 1 - df_select['fdr']
 
     edge_data = zip(sources, targets, weights)
-
+    
+    nodes_list = df_select['row'].tolist() + df_select['col'].tolist()
+    nodes_list = list(set(nodes_list))
+    for node in nodes_list:
+      tmptitle = title[node] + ': ' + desc[node] + '<br>Neighbors:'
+      for i in range(len(df_select)):
+          if df_select['row'][i+1] == node:
+            tmpid = df_select['col'][i+1]
+            tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
+          elif df_select['col'][i+1] == node:
+            tmpid = df_select['row'][i+1]
+            tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
+        
+        code_net.add_node(title[node]+': '+desc[node], desc[node],
+                          title = tmptitle, color = nodes_color[node])
+        
     for e in edge_data:
         src = e[0]
         dst = e[1]
         w = e[2]
-        
-        tmptitle = title[src] + ': ' + desc[src] + '<br>Neighbors:'
-        for i in range(len(df_select)):
-          if df_select['row'][i+1] == src:
-            tmpid = df_select['col'][i+1]
-            tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
-          elif df_select['col'][i+1] == src:
-            tmpid = df_select['row'][i+1]
-            tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
-        
-        code_net.add_node(title[src]+': '+desc[src], desc[src],
-                          title = tmptitle, color = nodes_color[src])
-        
-        tmptitle = title[dst] + ': ' + desc[dst] + '<br>Neighbors:'
-        for i in range(len(df_select)):
-          if df_select['row'][i+1] == dst:
-            tmpid = df_select['col'][i+1]
-            tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
-          elif df_select['col'][i+1] == dst:
-            tmpid = df_select['row'][i+1]
-            tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
-        
-        code_net.add_node(title[dst]+': '+desc[dst], desc[dst],
-                          title = tmptitle, color = nodes_color[dst])
         
         #code_net.add_node(title[src]+': '+desc[src], desc[src], 
         #                  title = title[src] + ': ' + desc[src],
