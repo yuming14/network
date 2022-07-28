@@ -93,6 +93,7 @@ else:
     #df_select = df_select.loc[0:max(int(len(df_select)*N_edge_select),1)]
     df_select = df_select.loc[0:int(len(df_select)*N_edge_select)]
     df_select = df_select.reset_index(drop=True)
+    df_select.index = range(len(df_select))
     
     if len(df_select) == 0:
         st.text('Incorrect')
@@ -107,11 +108,11 @@ else:
     for node in nodes_list:
       tmptitle = title[node] + ': ' + desc[node] + '<br>Neighbors:'
       for i in range(len(df_select)):
-          if df_select['row'][i+1] == node:
-            tmpid = df_select['col'][i+1]
+          if df_select['row'][i] == node:
+            tmpid = df_select['col'][i]
             tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
-          elif df_select['col'][i+1] == node:
-            tmpid = df_select['row'][i+1]
+          elif df_select['col'][i] == node:
+            tmpid = df_select['row'][i]
             tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
         
       code_net.add_node(title[node]+': '+desc[node], desc[node], title = tmptitle, color = nodes_color[node])
