@@ -86,7 +86,7 @@ else:
            got_data['col'].isin(selected_idx))
     df_select = got_data.loc[tmp]
     del tmp
-    del tmp_part
+    #del tmp_part
     df_select = df_select.reset_index(drop=True)
     df_select = df_select.loc[0:max(int(len(df_select)*N_edge_select),1)]
     df_select = df_select.reset_index(drop=True)
