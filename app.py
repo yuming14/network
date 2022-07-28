@@ -9,7 +9,8 @@ import numpy as np
 st.title('Network Graph Visualization')
 
 # Set Nrow
-N_rows = st.slider("Nrows of edges to read in: ", min_value=1, max_value=1000000)
+#N_rows = st.slider("Nrows of edges to read in: ", min_value=1, max_value=1000000)
+N_rows = 1000000
 
 # Read dataset (CSV)
 
@@ -56,8 +57,9 @@ selected_idx_idx = [code_list.index(i) for i in selected_codes]
 selected_idx = [idx[i] for i in selected_idx_idx]
 st.write("Nselected ="+str(len(selected_idx)))
 
-target_fdr = st.slider("Target -log_10(Fdr)", min_value=0, max_value=50)
-st.write("target fdr =", 1/np.power(10, target_fdr))
+#target_fdr = st.slider("Target -log_10(Fdr)", min_value=0, max_value=50)
+#st.write("target fdr =", 1/np.power(10, target_fdr))
+N_edge_select = st.slider("top N edges per nodes", min_value=1, max_value=1000)
 
 # Set info message on initial site load
 if len(selected_codes) == 0:
@@ -70,11 +72,16 @@ else:
     code_net = Network(height='800px', bgcolor='#222222', font_color='white')
 
     # Create networkx graph object from pandas dataframe
-    tmp = (got_data['row'].isin(selected_idx) | \
-           got_data['col'].isin(selected_idx))
-    tmp = tmp & (got_data['fdr'] <= (1/np.power(10, target_fdr)))
+    tmp = []
+    for selected_idx_part in selected_idx:
+      tmp_part = (got_data['row'].isin(selected_idx) | \
+                  got_data['col'].isin(selected_idx))
+      tmp_part = tmp_part[range(0,np.min(len(tmp_part),N_edge_select))]
+      tmp = tmp + tmp_part
+    
     df_select = got_data.loc[tmp]
     del tmp
+    del tmp_part
     df_select = df_select.reset_index(drop=True)
     if len(df_select) == 0:
         st.text('Incorrect')
@@ -91,10 +98,10 @@ else:
         dst = e[1]
         w = e[2]
 
-        code_net.add_node(title[src]+': '+desc[src], title[src], 
+        code_net.add_node(title[src]+': '+desc[src], desc[src], 
                           title = title[src] + ': ' + desc[src],
                           color = nodes_color[src])
-        code_net.add_node(title[dst]+': '+desc[dst], title[dst], 
+        code_net.add_node(title[dst]+': '+desc[dst], desc[dst], 
                           title = title[dst] + ': ' + desc[dst],
                           color = nodes_color[dst])
         code_net.add_edge(title[src]+': '+desc[src], 
@@ -115,9 +122,9 @@ else:
     #code_net.repulsion(node_distance=420, central_gravity=0.33,
     #                   spring_length=110, spring_strength=0.10,
     #                   damping=0.95)
-    #code_net.repulsion(node_distance=420, central_gravity=-22350,
-    #                   spring_length=250, spring_strength=0.10,
-    #                   damping=0.95)
+    code_net.repulsion(node_distance=420, central_gravity=-22350,
+                       spring_length=250, spring_strength=0.10,
+                       damping=0.95)
 
     # Save and read graph as HTML file (on Streamlit Sharing)
     try:
