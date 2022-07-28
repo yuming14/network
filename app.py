@@ -77,7 +77,7 @@ else:
       #tmp_part = [got_data['row'].tolist().index(selected_idx_part),
       #            got_data['col'].tolist().index(selected_idx_part)]
     #  tmp_part = [i for i,x in enumerate(got_data['row'].tolist()) if x == selected_idx_part ] + \
-                 [i for i,x in enumerate(got_data['col'].tolist()) if x == selected_idx_part ]
+    #             [i for i,x in enumerate(got_data['col'].tolist()) if x == selected_idx_part ]
     #  tmp_part.sort()
     #  tmp_part = tmp_part[0:(max(int(len(tmp_part)*N_edge_select),1))]
     #  tmp = tmp + tmp_part
