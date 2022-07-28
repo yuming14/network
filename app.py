@@ -59,7 +59,7 @@ st.write("Nselected = "+str(len(selected_idx)))
 
 #target_fdr = st.slider("Target -log_10(Fdr)", min_value=0, max_value=50)
 #st.write("target fdr =", 1/np.power(10, target_fdr))
-N_edge_select = st.slider("top prop% edges per node", min_value=0.0, max_value=1.0)
+N_edge_select = st.slider("top prop% edges", min_value=0.0, max_value=1.0)
 
 # Set info message on initial site load
 if len(selected_codes) == 0:
@@ -72,20 +72,25 @@ else:
     code_net = Network(height='600px', bgcolor='#222222', font_color='white')
 
     # Create networkx graph object from pandas dataframe
-    tmp = []
-    for selected_idx_part in selected_idx:
+    #tmp = []
+    #for selected_idx_part in selected_idx:
       #tmp_part = [got_data['row'].tolist().index(selected_idx_part),
       #            got_data['col'].tolist().index(selected_idx_part)]
-      tmp_part = [i for i,x in enumerate(got_data['row'].tolist()) if x == selected_idx_part ] + \
+    #  tmp_part = [i for i,x in enumerate(got_data['row'].tolist()) if x == selected_idx_part ] + \
                  [i for i,x in enumerate(got_data['col'].tolist()) if x == selected_idx_part ]
-      tmp_part.sort()
-      tmp_part = tmp_part[0:(max(int(len(tmp_part)*N_edge_select),1))]
-      tmp = tmp + tmp_part
-    
+    #  tmp_part.sort()
+    #  tmp_part = tmp_part[0:(max(int(len(tmp_part)*N_edge_select),1))]
+    #  tmp = tmp + tmp_part
+    #  df_select = got_data.loc[tmp]
+    tmp = (got_data['row'].isin(selected_idx) | \
+           got_data['col'].isin(selected_idx))
     df_select = got_data.loc[tmp]
     del tmp
     del tmp_part
     df_select = df_select.reset_index(drop=True)
+    df_select = df_select.loc[0:max(int(len(df_select)*N_edge_select),1)]
+    df_select = df_select.reset_index(drop=True)
+    
     if len(df_select) == 0:
         st.text('Incorrect')
     sources = df_select['row']
