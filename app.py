@@ -59,7 +59,7 @@ st.write("Nselected = "+str(len(selected_idx)))
 
 #target_fdr = st.slider("Target -log_10(Fdr)", min_value=0, max_value=50)
 #st.write("target fdr =", 1/np.power(10, target_fdr))
-N_edge_select = st.slider("top N edges per nodes", min_value=1, max_value=1000)
+N_edge_select = st.slider("top prop% edges per node", min_value=0, max_value=1)
 
 # Set info message on initial site load
 if len(selected_codes) == 0:
@@ -79,7 +79,7 @@ else:
       tmp_part = [i for i,x in enumerate(got_data['row'].tolist()) if x == selected_idx_part ] + \
                  [i for i,x in enumerate(got_data['col'].tolist()) if x == selected_idx_part ]
       tmp_part.sort()
-      tmp_part = tmp_part[0:(min(len(tmp_part),N_edge_select))]
+      tmp_part = tmp_part[0:(max(int(len(tmp_part)*N_edge_select),1))]
       tmp = tmp + tmp_part
     
     df_select = got_data.loc[tmp]
