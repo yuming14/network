@@ -92,10 +92,10 @@ else:
         w = e[2]
 
         code_net.add_node(title[src]+': '+desc[src], title[src], 
-                          title = title[src] + ':\n' + desc[src],
+                          title = title[src] + ': ' + desc[src],
                           color = nodes_color[src])
         code_net.add_node(title[dst]+': '+desc[dst], title[dst], 
-                          title = title[dst] + ':\n' + desc[dst],
+                          title = title[dst] + ': ' + desc[dst],
                           color = nodes_color[dst])
         code_net.add_edge(title[src]+': '+desc[src], 
                           title[dst]+': '+desc[dst], 
@@ -106,7 +106,7 @@ else:
 
     # add neighbor data to node hover data
     for node in code_net.nodes:
-        node['title'] += '\n Neighbors:\n' + '\n'.join(neighbor_map[node['id']])
+        node['title'] += '<br> Neighbors:<br>' + '<br>'.join(neighbor_map[node['id']])
         node['value'] = np.log(np.log(len(neighbor_map[node['id']])+5))
     
     st.text('Nnodes ='+str(len(code_net.nodes)))
