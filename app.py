@@ -110,10 +110,10 @@ else:
       for i in range(len(df_select)):
           if df_select['row'][i] == node:
             tmpid = df_select['col'][i]
-            tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
+            tmptitle = tmptitle + '<br>' + title[tmpid] + ': ' + desc[tmpid]
           elif df_select['col'][i] == node:
             tmpid = df_select['row'][i]
-            tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
+            tmptitle = tmptitle + '<br>' + title[tmpid] + ': ' + desc[tmpid]
         
       code_net.add_node(title[node]+': '+desc[node], desc[node], title = tmptitle, color = nodes_color[node])
         
