@@ -88,7 +88,8 @@ else:
     del tmp
     #del tmp_part
     df_select = df_select.reset_index(drop=True)
-    df_select = df_select.loc[0:max(int(len(df_select)*N_edge_select),1)]
+    #df_select = df_select.loc[0:max(int(len(df_select)*N_edge_select),1)]
+    df_select = df_select.loc[0:int(len(df_select)*N_edge_select)]
     df_select = df_select.reset_index(drop=True)
     
     if len(df_select) == 0:
