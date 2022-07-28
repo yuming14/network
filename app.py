@@ -133,12 +133,12 @@ else:
                           value = w*0.5, 
                           color = {'color': 'dimgrey', 'highlight': 'whitesmoke'})
 
-    #neighbor_map = code_net.get_adj_list()
+    neighbor_map = code_net.get_adj_list()
 
     # add neighbor data to node hover data
-    #for node in code_net.nodes:
+    for node in code_net.nodes:
     #    node['title'] += '<br> Neighbors:<br>' + '<br>'.join(neighbor_map[node['id']])
-    #    node['value'] = np.log(np.log(len(neighbor_map[node['id']])+5))
+        node['value'] = np.log(np.log(len(neighbor_map[node['id']])+5))
     
     st.text('Nnodes = '+str(len(code_net.nodes))+'; Nedges = '+str(len(df_select)))
 
