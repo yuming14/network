@@ -114,7 +114,7 @@ else:
             tmpid = df_select['row'][i+1]
             tmptitle = '<br>' + tmptitle + title[tmpid] + ': ' + desc[tmpid]
         
-        code_net.add_node(title[node]+': '+desc[node], desc[node], title = tmptitle, color = nodes_color[node])
+      code_net.add_node(title[node]+': '+desc[node], desc[node], title = tmptitle, color = nodes_color[node])
         
     for e in edge_data:
         src = e[0]
